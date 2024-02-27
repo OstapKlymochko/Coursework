@@ -1,0 +1,94 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - dev
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+  # apigateway:
+  #   container_name: apigateway
+  #   build:
+  #     context: ./ApiGateway
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5000:5000"
+  #   networks:
+  #     - dev
+  # authservice:
+  #   container_name: authservice
+  #   build:
+  #     dockerfile: ./AuthService/Dockerfile
+  #   ports:
+  #     - "5001:5001"
+  #   depends_on:
+  #     # - apigateway
+  #     - rabbitmq
+  #     - authservice-database
+  #   networks:
+  #     - dev
+  #   environment:
+  #     - ConnectionStrings__DefaultConnection= User Id=postgres;Password=postgres;Server=authservice-database;Port=5432;Database=AuthServiceDatabase;IntegratedSecurity=true;Pooling=true; 
+  # Docker host -> localhost host.docker.internal
+  # authservice-database:
+  #   image: postgres:latest
+  #   # image: postgres:14-alpine
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ~/apps/postgres:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=AuthServiceDatabase
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+  #   restart: always
+  #   networks:
+  #     - dev
+  # userservice:
+  #   container_name: userservice
+  #   build:
+  #     dockerfile: ./UserService/Dockerfile
+  #   ports:
+  #     - "5002:5002"
+  #   depends_on:
+  #     - apigateway
+  #     - rabbitmq
+  #     - userservice-database
+  #   networks:
+  #     - dev
+  #   environment:
+  #     - ConnectionStrings__DefaultConnection= User Id=postgres;Password=postgres;Server=authservice-database;Port=5433;Database=UserServiceDatabase;IntegratedSecurity=true;Pooling=true; 
+ 
+  # userservice-database:
+  #   image: postgres:latest
+  #   # image: postgres:14-alpine
+  #   ports:
+  #     - 5433:5433
+  #   volumes:
+  #     - ~/apps/postgres:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=UserServiceDatabase
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+  #   restart: always
+  #   networks:
+  #     - dev
+
+networks:
+  dev:
+    driver: bridge
+
+volumes:
+  pgdata:

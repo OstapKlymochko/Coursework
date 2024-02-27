@@ -1,0 +1,29 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/auth/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/users/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    }
+  ],
+  "GlobalConfiguration": {}
+}
