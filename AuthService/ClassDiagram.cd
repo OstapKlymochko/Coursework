@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AuthService.Services.AuthService" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AwQABAAEAAIAAAAABAgAAgAwAAAAAAAAAABAABAAEAQ=</HashCode>
+      <FileName>Services\AuthService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_emailService" />
+      <Field Name="_jwtService" />
+      <Field Name="_messageQueueService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Common.Services.DataAccessService" BaseTypeListCollapsed="true">
+    <Position X="2" Y="3.25" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Common.Services.DbContext" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="3.25" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Common.Services.FileLinkGeneratorService" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Common.Services.MessageQueueService" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="AuthService.Services.Interfaces.IAuthService">
+    <Position X="20.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAIAAAAABAgAAAAAAAAAAAAAAAAAABAAEAQ=</HashCode>
+      <FileName>Services\Interfaces\IAuthService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AuthService.Services.Interfaces.IEmailService">
+    <Position X="13.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IEmailService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AuthService.Services.Interfaces.IJwtService">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAABAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IJwtService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AuthService.Services.Interfaces.IRolesService">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IRolesService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IMessageQueueService">
+    <Position X="17.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IDataAccessService">
+    <Position X="6.5" Y="6.25" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IDbContext">
+    <Position X="6.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IFileLinkGeneratorService">
+    <Position X="6.5" Y="4.75" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

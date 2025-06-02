@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Common.Services.DbContext">
+    <Position X="0.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DbContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.Services.FileLinkGeneratorService">
+    <Position X="6.5" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Services\FileLinkGeneratorService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.Services.MessageQueueService">
+    <Position X="10.25" Y="4.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABCAAAAAAAAAAAAAAAACAAAAEAAAAABAAAAAAAA=</HashCode>
+      <FileName>Services\MessageQueueService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.Services.DataAccessService">
+    <Position X="3.25" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAABAQAAAAAAAAAAAAAAAAACAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DataAccessService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Common.Services.Interfaces.IDataAccessService">
+    <Position X="3.25" Y="2.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAABAQAAAAAAAAAAAAAAAAACAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IDataAccessService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IDbContext">
+    <Position X="0.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IFileLinkGeneratorService">
+    <Position X="6.5" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IFileLinkGeneratorService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IMessageQueueService">
+    <Position X="10.25" Y="2.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABCAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IMessageQueueService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

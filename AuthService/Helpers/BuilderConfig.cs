@@ -1,10 +1,11 @@
 ﻿using System.Text;
-using AuthService.Consumers;
 using AuthService.DbContext;
 using AuthService.Models;
 using AuthService.Services;
 using AuthService.Services.Interfaces;
 using AuthService.Validators;
+using Common.Services.Interfaces;
+using Common.Services;
 using FluentValidation;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,10 +13,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using _AuthService = AuthService.Services.AuthService;
+using AuthService.Consumers;
 
 namespace AuthService.Helpers
 {
-	public static class BuilderConfig
+    public static class BuilderConfig
 	{
 		public static void InitDbContext(this WebApplicationBuilder builder)
 		{
@@ -34,6 +36,8 @@ namespace AuthService.Helpers
 				options.Password.RequireLowercase = true;
 				options.Password.RequireUppercase = true;
 				options.Password.RequiredLength = 8;
+
+				options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-/ ";
 			}).AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<CustomIdentityErrorDescriber>().AddDefaultTokenProviders();
 		}
 
@@ -64,7 +68,7 @@ namespace AuthService.Helpers
 			{
 				var host = builder.Environment.IsProduction() ? "ProdHost" : "Host";
 				bus.SetKebabCaseEndpointNameFormatter();
-				bus.AddConsumer<CheckAuthorRoleConsumer>();
+				bus.AddConsumer<AuthDataUpdatedConsumer>();
 				bus.UsingRabbitMq((context, config) =>
 				{
 					config.Host(builder.Configuration[$"RabbitMQ:{host}"], h =>
@@ -84,10 +88,12 @@ namespace AuthService.Helpers
 			builder.Services.AddScoped<IEmailService, EmailService>();
 			builder.Services.AddScoped<IJwtService, JwtService>();
 			builder.Services.AddScoped<IRolesService, RolesService>();
-			builder.Services.AddScoped<IValidator<LoginUserModel>, LoginUserModelValidator>();
 			builder.Services.AddScoped<IValidator<RegisterUserModel>, RegisterUserModelValidator>();
-			builder.Services.AddScoped<IValidator<UserDataModel>, UpdateUserValidator>();
-			builder.Services.AddScoped<IValidator<ConfirmEmailModel>, ConfirmEmailValidator>();
+			builder.Services.AddScoped<IMessageQueueService, MessageQueueService>(provider => new MessageQueueService
+			(
+				provider.GetRequiredService<IPublishEndpoint>(),
+				provider.GetRequiredService<IScopedClientFactory>()
+			));
 		}
 
 		public static void InitExceptionHandling(this WebApplication app)
@@ -106,6 +112,6 @@ namespace AuthService.Helpers
 				context.Database.Migrate();
 			}
 		}
-		
+
 	}
 }

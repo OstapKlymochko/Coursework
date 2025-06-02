@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Common": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "S3_CLIENT": "AKIAZQ3DTIFTFEXO4CWM",
+        "S3_SECRET": "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",
+        "S3_BUCKET": "coursework--bucket"
+      }
+    }
+  }
+}

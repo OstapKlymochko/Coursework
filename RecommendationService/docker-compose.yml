@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: recommendationservice-app
+    image: recommendationservice-app
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    ports:
+      - "5005:5005"
+      - "5678:5678"
+    volumes:
+      - .:/app
+    env_file:
+      - .env

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FilesService.Services.FilesService" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAABEAAAAAABAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\FilesService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_s3Service" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FilesService.Services.S3Service" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAABAAAIBQAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Services\S3Service.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_s3Client" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Amazon.S3.AmazonS3Client">
+    <Position X="12.75" Y="2.5" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FilesService.Services.Interface.IFilesService">
+    <Position X="5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interface\IFilesService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FilesService.Services.Interface.IS3Service">
+    <Position X="8" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAIBQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interface\IS3Service.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

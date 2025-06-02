@@ -1,8 +1,9 @@
-﻿using Dapper;
+﻿using Common.Services.Interfaces;
+using Dapper;
 
 namespace Common.Services
 {
-	public class DataAccessService : IDataAccessService
+    public class DataAccessService : IDataAccessService
 	{
 		private readonly IDbContext _ctx;
 		public DataAccessService(IDbContext ctx)
@@ -27,5 +28,13 @@ namespace Common.Services
 			using var connection = _ctx.CreateConnection();
 			await connection.ExecuteAsync(query, parameters);
 		}
+
+		public async Task<TReturn> ExecuteStatementAndReturnAsync<TReturn, TParameters>(string query, TParameters? parameters = null) where TParameters : class
+		{
+			using var connection = _ctx.CreateConnection();
+			var res = await connection.QueryAsync<TReturn>(query, parameters);
+			return res.Single();
+		}
+
 	}
 }

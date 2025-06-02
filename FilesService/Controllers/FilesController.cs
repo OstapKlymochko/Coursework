@@ -1,51 +1,64 @@
-using Common.CommonTypes;
+﻿using Common.CommonTypes;
+using Common.Contracts;
+using Common.Services.Interfaces;
 using FilesService.Helpers;
 using FilesService.Models;
-using FilesService.Services.Interfaces;
+using FilesService.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilesService.Controllers
 {
-	[ApiController]
-	[Route("/api/[controller]")]
-	public class FilesController : ControllerBase
-	{
-		private readonly IFilesService _filesService;
-		public FilesController(IFilesService filesService)
-		{
-			_filesService = filesService;
-		}
-		[HttpGet("get/{fileId:int}")]
-		public async Task<IActionResult> GetFile([FromRoute] int fileId)
-		{
-			if (fileId == default) return new BadRequestObjectResult(new BasicResponse("Invalid parameter value"));
-			var result = await _filesService.GetFileById(fileId);
-			if (result.Value is FileStreamResult) return result.Value;
-			return result.MapToResponse();
-		}
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FilesController : Controller
+    {
+        private readonly IMessageQueueService _messageQueueService;
+        private readonly IFilesService _filesService;
+        public FilesController(IMessageQueueService messageQueueService, IFilesService filesService)
+        {
+            _messageQueueService = messageQueueService;
+            _filesService = filesService;
+        }
 
-		[HttpGet("get/{fileName}")]
-		public async Task<IActionResult> GetFilesByName([FromRoute] string fileName)
-		{
-			var result = await _filesService.GetFilesByNameAsync(fileName);
-			return result.MapToResponse();
-		}
+        [HttpPost("song")]
+        [Authorize(Roles = "Author")]
+        public async Task<IActionResult> CreateSongAsync([FromForm] UploadSongModel uploadSongModel)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.GetModelErrors());
 
-		[HttpGet("get-url/{fileId:int}")]
-		public async Task<IActionResult> GetFileUrl([FromRoute] int fileId)
-		{
-			if (fileId == default) return new BadRequestObjectResult(new BasicResponse("Invalid parameter value"));
-			var result = await _filesService.GetPreSignedUrl(fileId);
-			return result.MapToResponse();
-		}
+            var songCreatedMessage = new SongUploadedContract()
+            {
+                AuthorId = this.ExtractIdFromToken(),
+                AuthorPseudonym = uploadSongModel.Pseudonym,
+                CreatedAt = DateTime.UtcNow,
+                GenreId = uploadSongModel.GenreId,
+                Title = uploadSongModel.Title
+            };
 
-		[HttpPost("upload")]
-		public async Task<IActionResult> GetFilesList([FromForm] UploadFileModel model)
-		{
-			int userId = _filesService.ExtractIdFromToken(HttpContext);
-			var result = await _filesService.UploadFileAsync(model, userId);
-			return result.MapToResponse();
-		}
+            if (uploadSongModel.Logo != null) songCreatedMessage.LogoFileKey = await _filesService.SaveFileAsync(uploadSongModel.Logo);
+            if (uploadSongModel.VideoClip != null) songCreatedMessage.VideoClipFileKey = await _filesService.SaveFileAsync(uploadSongModel.VideoClip);
+            songCreatedMessage.SongFileKey = await _filesService.SaveFileAsync(uploadSongModel.Song);
 
-	}
+            await _messageQueueService.PublishMessageAsync(songCreatedMessage);
+            return Ok(new BasicResponse("Uploaded successfully"));
+        }
+
+        [HttpPost("avatar")]
+        public async Task<IActionResult> UploadAvatarAsync([FromForm] UploadAvatarModel avatarModel)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.GetModelErrors());
+            var fileKey = await _filesService.SaveFileAsync(avatarModel.Avatar);
+
+            int userId = this.ExtractIdFromToken();
+            var message = new AvatarUploadedContract()
+            {
+                FileKey = fileKey,
+                UserId = userId
+            };
+            await _messageQueueService.PublishMessageAsync(message);
+
+            return Ok(new BasicResponse("Uploaded successfully"));
+        }
+    }
 }

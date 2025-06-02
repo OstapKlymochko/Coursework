@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using Common.CommonTypes.Interfaces;
-using Common.Services;
+using Common.Services.Interfaces;
 
 namespace Common.GenericRepository
 {
-	public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
 	{
 		private readonly string _tableName;
 		private readonly IDataAccessService _accessService;

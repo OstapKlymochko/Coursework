@@ -16,7 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilesService", "FilesService\FilesService.csproj", "{FB772EA6-9316-4EE7-B0CA-5FE714F04E63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsService", "StatisticsService\StatisticsService.csproj", "{491A6097-1835-4B7C-A34E-370FFD0E37A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicService", "MusicService\MusicService.csproj", "{FC6D63FF-FA34-47A8-A4B7-419E9FC12285}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilesService", "FilesService\FilesService.csproj", "{BFCB8A47-CE95-4B8D-B30E-0243B5131DC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.Tests", "AuthService.Tests\AuthService.Tests.csproj", "{AE087912-7B0D-4F35-BC53-ABF083340C0F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserServiceTests", "UserServiceTests\UserServiceTests.csproj", "{25F15D46-CDC9-4500-A5D5-A8232D2B28AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicServiceTests", "MusicServiceTests\MusicServiceTests.csproj", "{5F611C4B-DDD6-464E-AA6D-2F7B093ACB84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +50,30 @@ Global
 		{6A169068-BE2C-41E3-B0FE-6ED9505D8D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A169068-BE2C-41E3-B0FE-6ED9505D8D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A169068-BE2C-41E3-B0FE-6ED9505D8D45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB772EA6-9316-4EE7-B0CA-5FE714F04E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB772EA6-9316-4EE7-B0CA-5FE714F04E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB772EA6-9316-4EE7-B0CA-5FE714F04E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB772EA6-9316-4EE7-B0CA-5FE714F04E63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{491A6097-1835-4B7C-A34E-370FFD0E37A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{491A6097-1835-4B7C-A34E-370FFD0E37A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{491A6097-1835-4B7C-A34E-370FFD0E37A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{491A6097-1835-4B7C-A34E-370FFD0E37A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6D63FF-FA34-47A8-A4B7-419E9FC12285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6D63FF-FA34-47A8-A4B7-419E9FC12285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6D63FF-FA34-47A8-A4B7-419E9FC12285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6D63FF-FA34-47A8-A4B7-419E9FC12285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFCB8A47-CE95-4B8D-B30E-0243B5131DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFCB8A47-CE95-4B8D-B30E-0243B5131DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFCB8A47-CE95-4B8D-B30E-0243B5131DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFCB8A47-CE95-4B8D-B30E-0243B5131DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE087912-7B0D-4F35-BC53-ABF083340C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE087912-7B0D-4F35-BC53-ABF083340C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE087912-7B0D-4F35-BC53-ABF083340C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE087912-7B0D-4F35-BC53-ABF083340C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25F15D46-CDC9-4500-A5D5-A8232D2B28AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25F15D46-CDC9-4500-A5D5-A8232D2B28AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25F15D46-CDC9-4500-A5D5-A8232D2B28AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25F15D46-CDC9-4500-A5D5-A8232D2B28AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F611C4B-DDD6-464E-AA6D-2F7B093ACB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F611C4B-DDD6-464E-AA6D-2F7B093ACB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F611C4B-DDD6-464E-AA6D-2F7B093ACB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F611C4B-DDD6-464E-AA6D-2F7B093ACB84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

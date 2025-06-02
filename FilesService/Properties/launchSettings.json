@@ -2,13 +2,12 @@
   "profiles": {
     "http": {
       "commandName": "Project",
-      "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://+:5003"
+        "ASPNETCORE_URLS": "http://+:5005"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5009"
+      "applicationUrl": "http://localhost:5200"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -24,7 +23,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:35690",
+      "applicationUrl": "http://localhost:6608",
       "sslPort": 0
     }
   }

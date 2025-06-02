@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicService.Services.CollectionsService" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="3.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAEAIAAQAABgAAAAIAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\CollectionsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_filesService" />
+      <Field Name="_collectionsDbService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicService.Services.CommentsService" BaseTypeListCollapsed="true">
+    <Position X="12" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAEAAAAAAAABAAgAAAAAAAAAAiIEAAEAAA=</HashCode>
+      <FileName>Services\CommentsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_commentsDbService" />
+      <Field Name="_fileLinkGeneratorService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicService.Services.ReactionsService" BaseTypeListCollapsed="true">
+    <Position X="20" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAIAAAAAAAAAABEAAAAAAEAAAA=</HashCode>
+      <FileName>Services\ReactionsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_collectionsDbService" />
+      <Field Name="_reactionsDbService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicService.Services.SongsService" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAEAAAAAAAJAAAQAAAQAwAAAAAAAAEAAEAAEAA=</HashCode>
+      <FileName>Services\SongsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_songsDbService" />
+      <Field Name="_filesService" />
+      <Field Name="_commentsService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MusicService.Services.Interfaces.ICommentsService">
+    <Position X="6.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAABAAgAAAAAAAAAACAEAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\ICommentsService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicService.Services.Interfaces.ICollectionsDbService">
+    <Position X="19.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBAAAAAAQAAAAAAgABAAIAAgAAAAAAAAAAAAEAAAAE=</HashCode>
+      <FileName>Services\Interfaces\ICollectionsDbService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicService.Services.Interfaces.ICommentsDbService">
+    <Position X="15.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAQAACAEAAAAAAAAAAAAAAAAAAAAAASAEAAAAEA=</HashCode>
+      <FileName>Services\Interfaces\ICommentsDbService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicService.Services.Interfaces.IReactionsDbService">
+    <Position X="18.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAIAAAAAAAAAAAAAAAAAAEAQAAAAAAQAA=</HashCode>
+      <FileName>Services\Interfaces\IReactionsDbService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicService.Services.Interfaces.ISongsDbService">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAIAAAAAAgAAAgAAAAAAAAAgEAAEAA=</HashCode>
+      <FileName>Services\Interfaces\ISongsDbService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.Services.Interfaces.IFileLinkGeneratorService">
+    <Position X="11.5" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
