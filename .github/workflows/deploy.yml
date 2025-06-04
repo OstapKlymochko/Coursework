@@ -6,8 +6,10 @@ on:
       - deploy
 
 env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: eu-north-1
-  ECR_ACCOUNT_ID: 060097987881
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
   deploy:
@@ -25,15 +27,14 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        run: |
-          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
-
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push ApiGateway image
         run: |
           docker build -t apigateway-service -f ./ApiGateway/Dockerfile .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/apigateway-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/apigateway-service
           docker tag apigateway-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
 
@@ -41,7 +42,7 @@ jobs:
         run: |
           docker build -t auth-service -f ./AuthService/Dockerfile .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/auth-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/auth-service
           docker tag auth-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
 
@@ -49,7 +50,7 @@ jobs:
         run: |
           docker build -t user-service -f ./UserService/Dockerfile .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/user-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/user-service
           docker tag user-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
      
@@ -57,7 +58,7 @@ jobs:
         run: |
           docker build -t music-service -f ./MusicService/Dockerfile .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/music-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/music-service
           docker tag music-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
      
@@ -65,17 +66,30 @@ jobs:
         run: |
           docker build -t files-service -f ./FilesService/Dockerfile .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/files-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/files-service
           docker tag files-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
      
-      - name: Build and push RecommendationsService image
+      - name: Build and push RecommendationService image
         run: |
-          docker build -t recommendation-service -f ./RecommendationsService/Dockerfile-prod .
+          docker build -t recommendation-service -f ./RecommendationService/Dockerfile-prod .
           IMAGE_TAG=latest
-          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/recommendation-service
+          ECR_REPO=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/recommendation-service
           docker tag recommendation-service:latest $ECR_REPO:$IMAGE_TAG
           docker push $ECR_REPO:$IMAGE_TAG
+
+      - name: Force ECS deployment for all services
+        run: |
+          SERVICES=("api-gateway-service" "auth-service" "user-service" "music-service" "files-service" "recommendation-service")
+          for service in "${SERVICES[@]}"; do
+            echo "Triggering new deployment for $service..."
+            aws ecs update-service \
+              --cluster dyplom-cluster \
+              --service $service \
+              --force-new-deployment \
+              --region $AWS_REGION
+          done
+
 
       # - name: Terraform Init
       #   working-directory: terraform
