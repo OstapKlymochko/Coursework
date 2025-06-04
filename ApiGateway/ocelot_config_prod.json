@@ -5,24 +5,87 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authservice",
+          "Host": "auth-service.local",
           "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/apigateway/auth/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/users/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "userservice",
+          "Host": "user-service.local",
           "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/apigateway/users/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/files/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "files-service.local",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/files/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/songs/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "music-service.local",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/songs/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // {
+    //   "DownstreamPathTemplate": "/api/statistics/{everything}",
+    //   "DownstreamScheme": "http",
+    //   "DownstreamHostAndPorts": [
+    //     {
+    //       "Host": "localhost",
+    //       "Port": 5004
+    //     }
+    //   ],
+    //   "UpstreamPathTemplate": "/apigateway/statistics/{everything}",
+    //   "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+    //   "AuthenticationOptions": {
+    //     "AuthenticationProviderKey": "Bearer"
+    //   }
+    // },
+    {
+      "DownstreamPathTemplate": "/api/recommendations/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "recommendation-service.local",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/recommendations/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     }
   ],
   "GlobalConfiguration": {}

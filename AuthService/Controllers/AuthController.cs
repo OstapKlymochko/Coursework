@@ -12,9 +12,10 @@ namespace AuthService.Controllers
     {
         private readonly IAuthService _authService;
 
-        public AuthController(IAuthService authService)
+        // public AuthController(IAuthService authService)
+        public AuthController()
         {
-            _authService = authService;
+            // _authService = authService;
         }
 
         [HttpPost("register")]
@@ -37,6 +38,12 @@ namespace AuthService.Controllers
             string userId = this.ExtractIdFromToken().ToString();
             var result = await _authService.RefreshAsync(userId);
             return result.MapToResponse();
+        }
+      
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(new { message = "Congrats on deployment with ci/cd" });
         }
 
         [HttpPost("resetPasswordRequest")]

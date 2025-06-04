@@ -1,0 +1,85 @@
+name: Deploy to AWS ECS
+
+on:
+  push:
+    branches:
+      - deploy
+
+env:
+  AWS_REGION: eu-north-1
+  ECR_ACCOUNT_ID: 060097987881
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push ApiGateway image
+        run: |
+          docker build -t apigateway-service -f ./ApiGateway/Dockerfile .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/apigateway-service
+          docker tag apigateway-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+
+      - name: Build and push AuthService image
+        run: |
+          docker build -t auth-service -f ./AuthService/Dockerfile .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/auth-service
+          docker tag auth-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+
+      - name: Build and push UserService image
+        run: |
+          docker build -t user-service -f ./UserService/Dockerfile .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/user-service
+          docker tag user-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+     
+      - name: Build and push MusicService image
+        run: |
+          docker build -t music-service -f ./MusicService/Dockerfile .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/music-service
+          docker tag music-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+     
+      - name: Build and push FilesService image
+        run: |
+          docker build -t files-service -f ./FilesService/Dockerfile .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/files-service
+          docker tag files-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+     
+      - name: Build and push RecommendationsService image
+        run: |
+          docker build -t recommendation-service -f ./RecommendationsService/Dockerfile-prod .
+          IMAGE_TAG=latest
+          ECR_REPO=${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/recommendation-service
+          docker tag recommendation-service:latest $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:$IMAGE_TAG
+
+      # - name: Terraform Init
+      #   working-directory: terraform
+      #   run: terraform init
+
+      # - name: Terraform Apply
+      #   working-directory: terraform
+      #   run: terraform apply -auto-approve

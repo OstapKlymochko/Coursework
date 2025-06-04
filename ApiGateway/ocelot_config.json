@@ -33,7 +33,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/apigateway/files/{everything}",
@@ -57,21 +57,21 @@
         "AuthenticationProviderKey": "Bearer"
       }
     },
-    {
-      "DownstreamPathTemplate": "/api/statistics/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5004
-        }
-      ],
-      "UpstreamPathTemplate": "/apigateway/statistics/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
-    },
+    // {
+    //   "DownstreamPathTemplate": "/api/statistics/{everything}",
+    //   "DownstreamScheme": "http",
+    //   "DownstreamHostAndPorts": [
+    //     {
+    //       "Host": "localhost",
+    //       "Port": 5004
+    //     }
+    //   ],
+    //   "UpstreamPathTemplate": "/apigateway/statistics/{everything}",
+    //   "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+    //   "AuthenticationOptions": {
+    //     "AuthenticationProviderKey": "Bearer"
+    //   }
+    // },
     {
       "DownstreamPathTemplate": "/api/recommendations/{everything}",
       "DownstreamScheme": "http",

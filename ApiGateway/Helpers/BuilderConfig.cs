@@ -29,7 +29,8 @@ namespace ApiGateway.Helpers
 
 		public static void InitOcelot(this WebApplicationBuilder builder)
 		{
-			string ocelotConfigFileName = builder.Environment.IsProduction() ? "ocelot_config_prod.json" : "ocelot_config.json";
+			// string ocelotConfigFileName = builder.Environment.IsProduction() ? "ocelot_config_prod.json" : "ocelot_config.json";
+			string ocelotConfigFileName = "ocelot_config_prod.json";
 			builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
 				.AddJsonFile(ocelotConfigFileName, optional: false, reloadOnChange: true)
 				.AddEnvironmentVariables();

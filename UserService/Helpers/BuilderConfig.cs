@@ -19,21 +19,21 @@ namespace UserService.Helpers
 {
     public static class BuilderConfig
     {
-        public static void InitRabbitMq(this WebApplicationBuilder builder)
+         public static void InitRabbitMq(this WebApplicationBuilder builder)
         {
             builder.Services.AddMassTransit(bus =>
             {
+                var host = "Host";
                 bus.SetKebabCaseEndpointNameFormatter();
                 bus.AddConsumer<UserServiceUserRegisteredConsumer>();
                 bus.AddConsumer<AvatarUploadedConsumer>();
-                //.Endpoint(c => c.InstanceId = Guid.NewGuid().ToString());
                 bus.UsingRabbitMq((context, config) =>
                 {
-                    var host = builder.Environment.IsProduction() ? "ProdHost" : "Host";
-                    config.Host(builder.Configuration[$"RabbitMQ:{host}"], h =>
+                    //config.Host(builder.Configuration[$"RabbitMQ:{host}"], builder.Configuration[$"RabbitMQ:Port"], h =>
+                    config.Host(new Uri(builder.Configuration["RabbitMQ:Uri"]!), h =>
                     {
-                        h.Username(builder.Configuration["RabbitMQ:Username"]);
-                        h.Password(builder.Configuration["RabbitMQ:Password"]);
+                        h.Username(builder.Configuration["RabbitMQ:Username"]!);
+                        h.Password(builder.Configuration["RabbitMQ:Password"]!);
                     });
                     config.ConfigureEndpoints(context);
                 });
